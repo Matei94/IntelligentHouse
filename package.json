@@ -19,5 +19,8 @@
   "homepage": "https://github.com/Matei94/IntelligentHouse",
   "dependencies": {
     "express": "^4.13.3"
+  },
+  "engines": {
+    "node": "0.10.28"
   }
 }
