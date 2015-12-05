@@ -1,3 +1,19 @@
+/*** DOCUMENT READY **********************************************************/
+
+$(document).ready(function() {
+    new PNotify({
+        title: 'Congrats',
+        text: "Your score has been submitted",
+        type: 'success',
+        animate_speed: 'fast',
+        hide: true,
+        delay: 2000
+    });
+});
+
+/*****************************************************************************/
+
+
 var x = document.getElementById("demo");
 function getLocation() {
     if (navigator.geolocation) {
