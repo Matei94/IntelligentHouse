@@ -26,9 +26,8 @@ $(document).ready(function() {
         if (gPosition == null) {
             alert("Position is not available");
         } else {
-            setTimeout(function() {
-                loadWeather(gPosition.coords.latitude + ',' + gPosition.coords.longitude);
-            }, 1000);
+            loadWeather(gPosition.coords.latitude + ',' + gPosition.coords.longitude);
+
             // $.ajax({
             //     url: 'http://api.openweathermap.org/data/2.5/weather?' +
             //          'lat=' + gPosition.coords.latitude +
@@ -124,14 +123,13 @@ function loadWeather(location, woeid) {
   $.simpleWeather({
     location: location,
     woeid: woeid,
-    unit: 'f',
+    unit: 'c',
     success: function(weather) {
-      html = '<h2><i class="icon-'+weather.code+'"></i> '+weather.temp+'&deg;'+weather.units.temp+'</h2>';
-      html += '<ul><li>'+weather.city+', '+weather.region+'</li>';
-      html += '<li class="currently">'+weather.currently+'</li>';
-      html += '<li>'+weather.alt.temp+'&deg;C</li></ul>';
+        html = '<h2><i class="icon-'+weather.code+'"></i> '+weather.temp+'&deg;'+weather.units.temp+'</h2>';
+        html += '<ul><li>'+weather.city+'</li>';
+        html += '<li class="currently">'+weather.currently+'</li></ul>';
 
-      $("#weather").html(html);
+        $("#weather").html(html);
     },
     error: function(error) {
       $("#weather").html('<p>'+error+'</p>');
