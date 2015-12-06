@@ -13,32 +13,39 @@ $(document).ready(function() {
     getLocation();
 
     $('#locationBTN').click(function() {
-        setTimeout(function() {
-            showPosition(gPosition);
-        }, 1000);
+        if (gPosition == null) {
+            alert("Position is not available");
+        } else {
+            setTimeout(function() {
+                showPosition(gPosition);
+            }, 1000);
+        }
     });
 
     $('#wheatherBTN').click(function() {
         if (gPosition == null) {
             alert("Position is not available");
         } else {
-            $.ajax({
-                url: 'http://api.openweathermap.org/data/2.5/weather?' +
-                     'lat=' + gPosition.coords.latitude +
-                     '&lon=' + gPosition.coords.longitude +
-                     '&APPID=' + gOpenWheatherApiKey,
-                dataType: 'jsonp',
-                success: function(results){
-                    new PNotify({
-                        title: 'Weather',
-                        text: JSON.stringify(results),
-                        type: 'info',
-                        animate_speed: 'fast',
-                        hide: true,
-                        delay: 2000
-                    });
-                }
-            });
+            setTimeout(function() {
+                loadWeather(gPosition.coords.latitude + ',' + gPosition.coords.longitude);
+            }, 1000);
+            // $.ajax({
+            //     url: 'http://api.openweathermap.org/data/2.5/weather?' +
+            //          'lat=' + gPosition.coords.latitude +
+            //          '&lon=' + gPosition.coords.longitude +
+            //          '&APPID=' + gOpenWheatherApiKey,
+            //     dataType: 'jsonp',
+            //     success: function(results){
+            //         new PNotify({
+            //             title: 'Weather',
+            //             text: JSON.stringify(results),
+            //             type: 'info',
+            //             animate_speed: 'fast',
+            //             hide: true,
+            //             delay: 2000
+            //         });
+            //     }
+            // });
         }
     });
 });
@@ -62,13 +69,14 @@ function setPosition(position) {
     gPosition = position;
 
     new PNotify({
-        title: 'Location available',
-        text: 'Latitude: ' + gPosition.coords.latitude +
-              '\nLongitude: ' + gPosition.coords.longitude,
+        title: 'Geolocation available',
+        text: 'Latitude:  ' + gPosition.coords.latitude +
+              '\nLongitude: ' + gPosition.coords.longitude +
+              '\nAccuracy:  ' + gPosition.coords.accuracy,
         type: 'success',
         animate_speed: 'fast',
         hide: true,
-        delay: 2000
+        delay: 5000
     });
 }
 
@@ -109,6 +117,26 @@ function showError(error) {
             alert("An unknown error occurred.");
             break;
     }
+}
+
+
+function loadWeather(location, woeid) {
+  $.simpleWeather({
+    location: location,
+    woeid: woeid,
+    unit: 'f',
+    success: function(weather) {
+      html = '<h2><i class="icon-'+weather.code+'"></i> '+weather.temp+'&deg;'+weather.units.temp+'</h2>';
+      html += '<ul><li>'+weather.city+', '+weather.region+'</li>';
+      html += '<li class="currently">'+weather.currently+'</li>';
+      html += '<li>'+weather.alt.temp+'&deg;C</li></ul>';
+
+      $("#weather").html(html);
+    },
+    error: function(error) {
+      $("#weather").html('<p>'+error+'</p>');
+    }
+  });
 }
 
 /*****************************************************************************/

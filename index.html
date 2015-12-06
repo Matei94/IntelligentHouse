@@ -11,10 +11,13 @@
     <script src="js/index.js"></script>
 
     <link rel="stylesheet" type="text/css" href="css/pnotify.custom.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/simple_weather.css" media="all">
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.0.2/jquery.simpleWeather.min.js"></script>
   </head>
 
   <body>
@@ -45,6 +48,9 @@
         </div>
       </div>
 
+
+      <button class="js-geolocation" style="display: none;">Use Your Location</button>
+
       <!-- Wheather BTN -->
       <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
               data-target="#wheatherModal" id="wheatherBTN">Wheather</button>
@@ -60,6 +66,7 @@
               <h4 class="modal-title">Wheather</h4>
             </div>
             <div class="modal-body">
+              <div id="weather"></div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
