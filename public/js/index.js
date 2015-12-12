@@ -3,17 +3,20 @@
 var gCosumerType = {
     ELECTRICITY: {
         bg: "bg-warning",
-        glyphicon: "glyphicon-flash"
+        glyphicon: "glyphicon-flash",
+        name: "electricity"
     },
 
     WATER: {
         bg: "bg-primary",
-        glyphicon: "glyphicon-tint"
+        glyphicon: "glyphicon-tint",
+        name: "water"
     },
 
     GAS: {
         bg: "bg-danger",
-        glyphicon: "glyphicon-fire"
+        glyphicon: "glyphicon-fire",
+        name: "gas"
     },
 }
 
@@ -28,17 +31,14 @@ var gNumConsumers = 0;
 $(document).ready(function() {
     $('#btn_add_electricity').click(function() {
         addConsumer(gCosumerType.ELECTRICITY);
-        $('#myModal').modal('show');
     });
 
     $('#btn_add_water').click(function() {
         addConsumer(gCosumerType.WATER);
-        $('#myModal').modal('show');
     });
 
     $('#btn_add_gas').click(function() {
         addConsumer(gCosumerType.GAS);
-        $('#myModal').modal('show');
     });
 });
 
@@ -49,7 +49,13 @@ $(document).ready(function() {
 /*** FUNCTIONS ***************************************************************/
 
 function addConsumer(type) {
-    $("#consumers").append(new_consumer(type));
+    $('#add-consumer-header').html('New ' + type.name + ' consumer');
+    $('#myModal').modal('show');
+    $('#btn-done').click(function() {
+        $("#consumers").append(new_consumer(type));
+        $('#myModal').close();
+    });
+
 }
 
 
