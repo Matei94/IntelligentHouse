@@ -17,6 +17,8 @@ var gCosumerType = {
     },
 }
 
+var gNumConsumers = 0;
+
 /*****************************************************************************/
 
 
@@ -48,11 +50,19 @@ function addConsumer(type) {
 }
 
 function new_consumer(type) {
-    return '<p class="' + type.bg + '">' +
+    var result = '<p id="pmyid' + gNumConsumers + '" class="' + type.bg + '">' +
         '<span class="glyphicon ' + type.glyphicon + '"></span>' +
-        ' name ' +
-        '<span class="glyphicon glyphicon-remove pull-right"></span>' +
+        ' name ' + gNumConsumers +
+        '<span id="myid' + gNumConsumers + '" class="glyphicon glyphicon-remove pull-right" onclick="remove(this.id)"></span>' +
         '</p>';
+
+    gNumConsumers += 1;
+
+    return result;
+}
+
+function remove(arg) {
+    $("#p" + arg).remove();
 }
 
 /*****************************************************************************/
