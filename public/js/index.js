@@ -51,18 +51,16 @@ $(document).ready(function() {
 function addConsumer(type) {
     $('#add-consumer-header').html('New ' + type.name + ' consumer');
     $('#myModal').modal('show');
+    $('#btn-done').off("click");
     $('#btn-done').click(function() {
-        $("#consumers").append(new_consumer(type));
-        $('#myModal').close();
+        $("#consumers").append(new_consumer(type, $('#input-name').val()));
     });
-
 }
 
 
-function new_consumer(type) {
+function new_consumer(type, name) {
     var result = '<p id="pmyid' + gNumConsumers + '" class="' + type.bg + '">' +
-        '<span class="glyphicon ' + type.glyphicon + '"></span>' +
-        ' name ' + gNumConsumers +
+        '<span class="glyphicon ' + type.glyphicon + '"></span> ' + name +
         '<span id="myid' + gNumConsumers + '" class="glyphicon glyphicon-remove pull-right" onclick="remove(this.id)"></span>' +
         '</p>';
 
