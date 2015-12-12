@@ -33,6 +33,7 @@
           </button>
         </div>
       </div>
+      <!-- Electrical consumer END -->
 
       <!-- Water consumer -->
       <div class="row">
@@ -42,6 +43,7 @@
           </button>
         </div>
       </div>
+      <!-- Water consumer END -->
 
       <!-- Gas consumer -->
       <div class="row">
@@ -51,22 +53,26 @@
           </button>
         </div>
       </div>
+      <!-- Gas consumer END -->
 
-      <!-- Consumers -->
+      <!-- Consumers + Statistics -->
       <div class="row my_footer">
+
+        <!-- Consumers -->
         <div class="col-sm-4">
           <div class="panel panel-default">
-            <div class="panel-heading text-center">Consumers</div>
+            <div id="consumers-header" class="panel-heading text-center">Consumers</div>
             <div id="consumers" class="panel-body my_panel_content">
-
             </div>
           </div>
         </div>
+        <!-- Consumers END -->
 
+        <!-- Statistics -->
         <div class="col-sm-8">
           <div class="panel panel-default">
-            <div class="panel-heading text-center">Statistics</div>
-            <div id="consumers" class="panel-body my_panel_content">
+            <div id="statistics-header" class="panel-heading text-center">Statistics</div>
+            <div id="statistics" class="panel-body my_panel_content">
               <table class="table">
                 <thead>
                   <tr>
@@ -111,7 +117,32 @@
             </div>
           </div>
         </div>
+        <!-- Statistics END -->
+
       </div>
+      <!-- Consumers + Statistics END -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+              <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div> <!-- container -->
   </body>
 

@@ -3,7 +3,7 @@
 }
 
 .my_footer {
-  position: fixed;
+  position: absolute;
   width: inherit;
   bottom: 0px;
 }

@@ -27,15 +27,18 @@ var gNumConsumers = 0;
 
 $(document).ready(function() {
     $('#btn_add_electricity').click(function() {
-      addConsumer(gCosumerType.ELECTRICITY);
+        addConsumer(gCosumerType.ELECTRICITY);
+        $('#myModal').modal('show');
     });
 
     $('#btn_add_water').click(function() {
-      addConsumer(gCosumerType.WATER);
+        addConsumer(gCosumerType.WATER);
+        $('#myModal').modal('show');
     });
 
     $('#btn_add_gas').click(function() {
-      addConsumer(gCosumerType.GAS);
+        addConsumer(gCosumerType.GAS);
+        $('#myModal').modal('show');
     });
 });
 
