@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>IntelligentHouse</title>
+    <title>Smart House</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +20,7 @@
 
     <!-- JS -->
     <script src='js/pnotify.custom.min.js'></script>
-    <!-- <script src="js/index.js"></script> -->
+    <script src="js/index.js"></script>
   </head>
 
   <body>
@@ -28,7 +28,7 @@
       <!-- Electrical consumer -->
       <div class="row">
         <div class="col-sm-4">
-          <button type="button" class="btn btn-success btn-lg btn-block">
+          <button id="btn_add_electricity" type="button" class="btn btn-success btn-lg btn-block">
             <span class="glyphicon glyphicon-flash"></span> Add electrical consumer
           </button>
         </div>
@@ -37,7 +37,7 @@
       <!-- Water consumer -->
       <div class="row">
         <div class="col-sm-4">
-          <button type="button" class="btn btn-success btn-lg btn-block top-buffer">
+          <button id="btn_add_water" type="button" class="btn btn-success btn-lg btn-block top-buffer">
             <span class="glyphicon glyphicon-tint"></span> Add water consumer
           </button>
         </div>
@@ -46,7 +46,7 @@
       <!-- Gas consumer -->
       <div class="row">
         <div class="col-sm-4">
-          <button type="button" class="btn btn-success btn-lg btn-block top-buffer">
+          <button id="btn_add_gas" type="button" class="btn btn-success btn-lg btn-block top-buffer">
             <span class="glyphicon glyphicon-fire"></span> Add gas consumer
           </button>
         </div>
@@ -56,16 +56,9 @@
       <div class="row my_footer">
         <div class="col-sm-3">
           <div class="panel panel-default">
-            <div class="panel-heading">Panel heading without title</div>
-            <div class="panel-body my_panel_content">
-              <p>element</p>
-              <p>element</p>
-              <p>element</p>
-              <p>element</p>
-              <p>element</p>
-              <p>element</p>
-              <p>element</p>
-              <p>element</p>
+            <div class="panel-heading">Consumers</div>
+            <div id="consumers" class="panel-body my_panel_content">
+
             </div>
           </div>
         </div>
