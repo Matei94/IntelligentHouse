@@ -1,9 +1,20 @@
 /*** VARIABLES ***************************************************************/
 
 var gCosumerType = {
-    ELECTRICITY: 0,
-    WATER:       1,
-    GAS:         2,
+    ELECTRICITY: {
+        bg: "bg-warning",
+        glyphicon: "glyphicon-flash"
+    },
+
+    WATER: {
+        bg: "bg-primary",
+        glyphicon: "glyphicon-tint"
+    },
+
+    GAS: {
+        bg: "bg-danger",
+        glyphicon: "glyphicon-fire"
+    },
 }
 
 /*****************************************************************************/
@@ -14,19 +25,15 @@ var gCosumerType = {
 
 $(document).ready(function() {
     $('#btn_add_electricity').click(function() {
-      on_click(gCosumerType.ELECTRICITY);
+      addConsumer(gCosumerType.ELECTRICITY);
     });
-});
 
-$(document).ready(function() {
     $('#btn_add_water').click(function() {
-      on_click(gCosumerType.WATER);
+      addConsumer(gCosumerType.WATER);
     });
-});
 
-$(document).ready(function() {
     $('#btn_add_gas').click(function() {
-      on_click(gCosumerType.GAS);
+      addConsumer(gCosumerType.GAS);
     });
 });
 
@@ -36,12 +43,16 @@ $(document).ready(function() {
 
 /*** FUNCTIONS ***************************************************************/
 
-function on_click(type) {
+function addConsumer(type) {
     $("#consumers").append(new_consumer(type));
 }
 
 function new_consumer(type) {
-    return "<p>" + type + "</p";
+    return '<p class="' + type.bg + '">' +
+        '<span class="glyphicon ' + type.glyphicon + '"></span>' +
+        ' name ' +
+        '<span class="glyphicon glyphicon-remove pull-right"></span>' +
+        '</p>';
 }
 
 /*****************************************************************************/
