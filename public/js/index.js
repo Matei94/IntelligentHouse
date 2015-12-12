@@ -49,6 +49,7 @@ function addConsumer(type) {
     $("#consumers").append(new_consumer(type));
 }
 
+
 function new_consumer(type) {
     var result = '<p id="pmyid' + gNumConsumers + '" class="' + type.bg + '">' +
         '<span class="glyphicon ' + type.glyphicon + '"></span>' +
@@ -61,8 +62,9 @@ function new_consumer(type) {
     return result;
 }
 
-function remove(arg) {
-    $("#p" + arg).remove();
+
+function remove(id) {
+    $("#p" + id).remove();
 }
 
 /*****************************************************************************/
