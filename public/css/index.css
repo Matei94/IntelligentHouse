@@ -1,0 +1,9 @@
+.top-buffer {
+  margin-top: 20px;
+}
+
+.myfooter {
+  position: fixed;
+  width: inherit;
+  bottom: 0px;
+}
