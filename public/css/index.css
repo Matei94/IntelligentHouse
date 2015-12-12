@@ -2,8 +2,13 @@
   margin-top: 20px;
 }
 
-.myfooter {
+.my_footer {
   position: fixed;
   width: inherit;
   bottom: 0px;
+}
+
+.my_panel_content {
+  height: 200px;
+  overflow-y: auto;
 }
