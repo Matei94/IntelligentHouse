@@ -40,6 +40,36 @@ $(document).ready(function() {
     $('#btn_add_gas').click(function() {
         addConsumer(gCosumerType.GAS);
     });
+
+    $('#btn-done-electricity').click(function() {
+        var name = $('#input-name-electricity').val();
+        if (name.length > 0) {
+            $("#consumers").append(new_consumer(gCosumerType.ELECTRICITY, name));
+            $('#input-name-electricity').val('');
+        } else {
+            return false;
+        }
+    });
+
+    $('#btn-done-water').click(function() {
+        var name = $('#input-name-water').val();
+        if (name.length > 0) {
+            $("#consumers").append(new_consumer(gCosumerType.WATER, name));
+            $('#input-name-water').val('');
+        } else {
+            return false;
+        }
+    });
+
+    $('#btn-done-gas').click(function() {
+        var name = $('#input-name-gas').val();
+        if (name.length > 0) {
+            $("#consumers").append(new_consumer(gCosumerType.GAS, name));
+            $('#input-name-gas').val('');
+        } else {
+            return false;
+        }
+    });
 });
 
 /*****************************************************************************/
@@ -49,12 +79,7 @@ $(document).ready(function() {
 /*** FUNCTIONS ***************************************************************/
 
 function addConsumer(type) {
-    $('#add-consumer-header').html('New ' + type.name + ' consumer');
-    $('#myModal').modal('show');
-    $('#btn-done').off("click");
-    $('#btn-done').click(function() {
-        $("#consumers").append(new_consumer(type, $('#input-name').val()));
-    });
+    $('#modal-' + type.name).modal('show');
 }
 
 

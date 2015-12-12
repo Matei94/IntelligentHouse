@@ -73,40 +73,40 @@
           <div class="panel panel-default">
             <div id="statistics-header" class="panel-heading text-center">Statistics</div>
             <div id="statistics" class="panel-body my_panel_content">
-              <table class="table">
+              <table class="table table-bordered">
                 <thead>
-                  <tr>
+                  <tr class="mythead">
                     <th></th>
-                    <th>&#36; &#47; week</th>
+                    <th>&#36; &#47; day</th>
                     <th>&#36; &#47; month</th>
                     <th>&#36; &#47; year</th>
                     <th>&#35; consumers</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="warning">
-                    <td><span class="glyphicon glyphicon-flash"></span> Electricity</td>
+                  <tr class="warning" align="right">
+                    <td align="left"><span class="glyphicon glyphicon-flash"></span> Electricity</td>
                     <td>1</td>
                     <td>2</td>
                     <td>3</td>
                     <td>4</td>
                   </tr>
-                  <tr class="info">
-                    <td><span class="glyphicon glyphicon-tint"></span> Water</td>
+                  <tr class="info" align="right">
+                    <td align="left"><span class="glyphicon glyphicon-tint"></span> Water</td>
                     <td>1</td>
                     <td>2</td>
                     <td>3</td>
                     <td>4</td>
                   </tr>
-                  <tr class="danger">
-                    <td><span class="glyphicon glyphicon-fire"></span> Gas</td>
+                  <tr class="danger" align="right">
+                    <td align="left"><span class="glyphicon glyphicon-fire"></span> Gas</td>
                     <td>1</td>
                     <td>2</td>
                     <td>3</td>
                     <td>4</td>
                   </tr>
-                  <tr>
-                    <td><strong>&#36; TOTAL</strong></td>
+                  <tr align="right">
+                    <td align="left"><strong>&#36; TOTAL</strong></td>
                     <td><strong>1</strong></td>
                     <td><strong>2</strong></td>
                     <td><strong>3</strong></td>
@@ -122,33 +122,134 @@
       </div>
       <!-- Consumers + Statistics END -->
 
-      <!-- Modal -->
-      <div id="myModal" class="modal fade" role="dialog">
+      <!-- Modal electricity -->
+      <div id="modal-electricity" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
-          <!-- Modal content-->
+          <!-- Modal content -->
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 id="add-consumer-header" class="modal-title">Modal Header</h4>
+              <h4 class="modal-title">New electrical consumer</h4>
             </div>
             <div id="add-consumer-body" class="modal-body">
               <form class="form-horizontal" role="form">
+                <!-- Name -->
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="con_name">Name:</label>
+                  <label class="control-label col-sm-2" for="electricity_name">Name:</label>
                   <div class="col-sm-10">
-                    <input id="input-name" type="text" class="form-control" id="con_name" placeholder="Enter name">
+                    <input id="input-name-electricity" type="text" class="form-control" placeholder="Enter name of consumer"  autofocus>
                   </div>
                 </div>
+                <!-- Name END -->
+
+                <!-- Power -->
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="power">Power:</label>
+                  <div class="col-sm-10">
+                    <input id="input-power" type="number" class="form-control" id="power" placeholder="Enter power usage in Watts [W]">
+                  </div>
+                </div>
+                <!-- Power end -->
+
+                <!-- Hours -->
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="power_power">Usage:</label>
+                  <div class="col-sm-10">
+                    <input id="input-usage-electricity" type="number" class="form-control" id="power_usage" placeholder="Enter hours of use per day">
+                  </div>
+                </div>
+                <!-- Hours end -->
               </form>
             </div>
             <div class="modal-footer">
-              <button id="btn-done" type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+              <button id="btn-done-electricity" type="button" class="btn btn-default" data-dismiss="modal">Done</button>
             </div>
           </div>
 
         </div>
       </div>
+      <!-- Modal electricity END -->
+
+      <!-- Modal water -->
+      <div id="modal-water" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content -->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">New water consumer</h4>
+            </div>
+            <div class="modal-body">
+              <form class="form-horizontal" role="form">
+                <!-- Name -->
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="input-name-water">Name:</label>
+                  <div class="col-sm-10">
+                    <input id="input-name-water" type="text" class="form-control" placeholder="Enter name of consumer"  autofocus>
+                  </div>
+                </div>
+                <!-- Name END -->
+
+                <!-- Usage -->
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="water_usage">Usage:</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" id="water_usage" placeholder="Enter volume used per day [m&#179;/day]">
+                  </div>
+                </div>
+                <!-- Power end -->
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button id="btn-done-water" type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- Modal water END -->
+
+      <!-- Modal gas -->
+      <div id="modal-gas" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content -->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">New gas consumer</h4>
+            </div>
+            <div class="modal-body">
+              <form class="form-horizontal" role="form">
+                <!-- Name -->
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="input-name-gas">Name:</label>
+                  <div class="col-sm-10">
+                    <input id="input-name-gas" type="text" class="form-control" placeholder="Enter name of consumer"  autofocus>
+                  </div>
+                </div>
+                <!-- Name END -->
+
+                <!-- Usage -->
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="gas_usage">Usage:</label>
+                  <div class="col-sm-10">
+                    <input id="gas_usage" type="number" class="form-control" placeholder="Enter volume used per day [m&#179;/day]">
+                  </div>
+                </div>
+                <!-- Usage end -->
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button id="btn-done-gas" type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- Modal gas END -->
 
     </div> <!-- container -->
   </body>
