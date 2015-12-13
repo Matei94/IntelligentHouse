@@ -89,6 +89,8 @@ $(document).ready(function() {
             return false;
         }
     });
+
+    getLocation();
 });
 
 /*****************************************************************************/
@@ -168,6 +170,60 @@ function updateStatistics(type, name, a, b) {
     $('#total-number').html( (parseInt(  $('#total-number').html()) + 1).toString());
 
     $("#consumers").append(new_consumer(type, name, cost_day.toString()));
+}
+
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+        $('#mapholder').html("Geolocation is not supported by this browser.")
+    }
+}
+
+
+function showPosition(position) {
+    // var latlon = position.coords.latitude + "," + position.coords.longitude;
+
+    // var img_url = "http://maps.googleapis.com/maps/api/staticmap?center="
+    // +latlon+"&zoom=14&size=" + $('#mapholder').width() + "x" + $('#mapholder').height() + "&sensor=false";
+    // $('#mapholder').html("<img src='"+img_url+"'>");
+
+    var lat = position.coords.latitude;
+    var lon = position.coords.longitude;
+
+    latlon = new google.maps.LatLng(lat, lon)
+    mapholder = document.getElementById('mapholder')
+    mapholder.style.height = '200px';
+    mapholder.style.width = ($('#mapholder').width()) + 'px';
+
+    var myOptions = {
+        center:latlon,zoom:14,
+        mapTypeId:google.maps.MapTypeId.ROADMAP,
+        mapTypeControl:false,
+        navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+    }
+
+    var map = new google.maps.Map(document.getElementById("mapholder"), myOptions);
+    var marker = new google.maps.Marker({position:latlon,map:map,title:"You are here!"});
+}
+
+
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            $('#mapholder').html("User denied the request for Geolocation.");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            $('#mapholder').html("Location information is unavailable.");
+            break;
+        case error.TIMEOUT:
+            $('#mapholder').html("The request to get user location timed out.");
+            break;
+        case error.UNKNOWN_ERROR:
+            $('#mapholder').html("An unknown error occurred.");
+            break;
+    }
 }
 
 /*****************************************************************************/
