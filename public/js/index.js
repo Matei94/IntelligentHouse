@@ -23,7 +23,7 @@ var gCosumerType = {
 var gNumConsumers = 0;
 
 var gCostElectricity = 0.57;
-var gCostWater       = 5.75;
+var gCostWater       = 1.28;
 var gCostGas         = 1.69;
 
 /*****************************************************************************/
@@ -50,8 +50,8 @@ $(document).ready(function() {
         var power = $('#input-power').val();
         var usage = $('#input-usage-electricity').val();
         if (name.length > 0 && power.length > 0 && usage.length > 0) {
-            $("#consumers").append(new_consumer(gCosumerType.ELECTRICITY, name));
-            updateStatistics(gCosumerType.ELECTRICITY, power, usage);
+            // $("#consumers").append(new_consumer(gCosumerType.ELECTRICITY, name));
+            updateStatistics(gCosumerType.ELECTRICITY, name, power, usage);
 
             $('#input-name-electricity').val('');
             $('#input-power').val('');
@@ -65,8 +65,8 @@ $(document).ready(function() {
         var name = $('#input-name-water').val();
         var usage = $('#input-usage-water').val();
         if (name.length > 0 && usage.length > 0) {
-            $("#consumers").append(new_consumer(gCosumerType.WATER, name));
-            updateStatistics(gCosumerType.WATER, usage);
+            // $("#consumers").append(new_consumer(gCosumerType.WATER, name));
+            updateStatistics(gCosumerType.WATER, name, usage);
 
             $('#input-name-water').val('');
             $('#input-usage-water').val('');
@@ -80,8 +80,8 @@ $(document).ready(function() {
         var usage = $('#input-usage-gas').val();
 
         if (name.length > 0 && usage.length > 0) {
-            $("#consumers").append(new_consumer(gCosumerType.GAS, name));
-            updateStatistics(gCosumerType.GAS, usage);
+            // $("#consumers").append(new_consumer(gCosumerType.GAS, name));
+            updateStatistics(gCosumerType.GAS, name, usage);
 
             $('#input-name-gas').val('');
             $('#input-usage-gas').val('');
@@ -102,8 +102,8 @@ function addConsumerForm(type) {
 }
 
 
-function new_consumer(type, name) {
-    var result = '<p id="pmyid' + gNumConsumers + '" class="' + type.bg + '">' +
+function new_consumer(type, name, cost) {
+    var result = '<p id="pmyid' + gNumConsumers + '" class="' + type.bg + '" cost="' + cost + '" type="' + type.name + '">' +
         '<span class="glyphicon ' + type.glyphicon + '"></span> ' + name +
         '<span id="myid' + gNumConsumers + '" class="glyphicon glyphicon-remove pull-right" onclick="remove(this.id)"></span>' +
         '</p>';
@@ -115,31 +115,47 @@ function new_consumer(type, name) {
 
 
 function remove(id) {
+    var cost_day   = parseFloat($("#p" + id).attr('cost'));
+    var cost_month = parseFloat((cost_day * 30).toFixed(2));
+    var cost_year  = parseFloat((cost_day * 365).toFixed(2));
+
+    var type = $("#p" + id).attr('type');
+
+    $('#' + type + '-day').html(    (parseFloat($('#' + type + '-day').html())    - cost_day).toFixed(2));
+    $('#' + type + '-month').html(  (parseFloat($('#' + type + '-month').html())  - cost_month).toFixed(2));
+    $('#' + type + '-year').html(   (parseFloat($('#' + type + '-year').html())   - cost_year).toFixed(2));
+    $('#' + type + '-number').html( (parseInt(  $('#' + type + '-number').html()) - 1).toString());
+
+    $('#total-day').html(    (parseFloat($('#total-day').html())    - cost_day).toFixed(2));
+    $('#total-month').html(  (parseFloat($('#total-month').html())  - cost_month).toFixed(2));
+    $('#total-year').html(   (parseFloat($('#total-year').html())   - cost_year).toFixed(2));
+    $('#total-number').html( (parseInt(  $('#total-number').html()) - 1).toString());
+
     $("#p" + id).remove();
 }
 
 
-function updateStatistics(type, a, b) {
+function updateStatistics(type, name, a, b) {
     var cost_day;
 
     if (type == gCosumerType.ELECTRICITY) {
-        var power = parseInt(a);
-        var usage = parseInt(b);
-        cost_day = gCostElectricity * (power / 1000) * usage;
+        var power = parseFloat(a);
+        var usage = parseFloat(b);
+        cost_day = parseFloat((gCostElectricity * (power / 1000) * usage).toFixed(2));
     }
 
     else if (type == gCosumerType.WATER) {
-        var usage = parseInt(a);
-        cost_day = gCostWater * usage;
+        var usage = parseFloat(a);
+        cost_day = parseFloat((gCostWater * usage).toFixed(2));
     }
 
     else if (type == gCosumerType.GAS) {
-        var usage = parseInt(a);
-        cost_day = gCostGas * usage;
+        var usage = parseFloat(a);
+        cost_day = parseFloat((gCostGas * usage).toFixed(2));
     }
 
-    var cost_month = cost_day * 30;
-    var cost_year = cost_day * 365;
+    var cost_month = parseFloat((cost_day * 30).toFixed(2));
+    var cost_year  = parseFloat((cost_day * 365).toFixed(2));
 
     $('#' + type.name + '-day').html(    (parseFloat($('#' + type.name + '-day').html())    + cost_day).toFixed(2));
     $('#' + type.name + '-month').html(  (parseFloat($('#' + type.name + '-month').html())  + cost_month).toFixed(2));
@@ -150,6 +166,8 @@ function updateStatistics(type, a, b) {
     $('#total-month').html(  (parseFloat($('#total-month').html())  + cost_month).toFixed(2));
     $('#total-year').html(   (parseFloat($('#total-year').html())   + cost_year).toFixed(2));
     $('#total-number').html( (parseInt(  $('#total-number').html()) + 1).toString());
+
+    $("#consumers").append(new_consumer(type, name, cost_day.toString()));
 }
 
 /*****************************************************************************/
