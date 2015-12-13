@@ -21,6 +21,7 @@ var gCosumerType = {
 }
 
 var gNumConsumers = 0;
+var gCost_kWh = 0.5644;
 
 /*****************************************************************************/
 
@@ -30,22 +31,28 @@ var gNumConsumers = 0;
 
 $(document).ready(function() {
     $('#btn_add_electricity').click(function() {
-        addConsumer(gCosumerType.ELECTRICITY);
+        addConsumerForm(gCosumerType.ELECTRICITY);
     });
 
     $('#btn_add_water').click(function() {
-        addConsumer(gCosumerType.WATER);
+        addConsumerForm(gCosumerType.WATER);
     });
 
     $('#btn_add_gas').click(function() {
-        addConsumer(gCosumerType.GAS);
+        addConsumerForm(gCosumerType.GAS);
     });
 
     $('#btn-done-electricity').click(function() {
         var name = $('#input-name-electricity').val();
-        if (name.length > 0) {
+        var power = $('#input-power').val();
+        var usage = $('#input-usage-electricity').val();
+        if (name.length > 0 && power.length > 0 && usage.length > 0) {
             $("#consumers").append(new_consumer(gCosumerType.ELECTRICITY, name));
+            updateStatistics(gCosumerType.ELECTRICITY, power, usage);
+
             $('#input-name-electricity').val('');
+            $('#input-power').val('');
+            $('#input-usage-electricity').val('');
         } else {
             return false;
         }
@@ -78,7 +85,7 @@ $(document).ready(function() {
 
 /*** FUNCTIONS ***************************************************************/
 
-function addConsumer(type) {
+function addConsumerForm(type) {
     $('#modal-' + type.name).modal('show');
 }
 
@@ -97,6 +104,22 @@ function new_consumer(type, name) {
 
 function remove(id) {
     $("#p" + id).remove();
+}
+
+
+function updateStatistics(type, a, b) {
+    if (type == gCosumerType.ELECTRICITY) {
+        var power = parseInt(a);
+        var usage = parseInt(b);
+        var cost_day = gCost_kWh * (power / 1000) * usage;
+        var cost_month = cost_day * 30;
+        var cost_year = cost_day * 365;
+
+        $('#electricity-day').html((parseFloat($('#electricity-day').html()) + cost_day).toFixed(2));
+        $('#electricity-month').html((parseFloat($('#electricity-month').html()) + cost_month).toFixed(2));
+        $('#electricity-year').html((parseFloat($('#electricity-year').html()) + cost_year).toFixed(2));
+        $('#electricity-number').html((parseInt($('#electricity-number').html()) + 1).toString());
+    }
 }
 
 /*****************************************************************************/

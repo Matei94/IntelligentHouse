@@ -12,3 +12,8 @@
   height: 250px;
   overflow-y: auto;
 }
+
+#my_panel {
+  position: absolute;
+  bottom: 0px;
+}
