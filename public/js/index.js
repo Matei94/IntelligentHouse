@@ -21,7 +21,10 @@ var gCosumerType = {
 }
 
 var gNumConsumers = 0;
-var gCost_kWh = 0.5644;
+
+var gCostElectricity = 0.57;
+var gCostWater       = 5.75;
+var gCostGas         = 1.69;
 
 /*****************************************************************************/
 
@@ -60,9 +63,13 @@ $(document).ready(function() {
 
     $('#btn-done-water').click(function() {
         var name = $('#input-name-water').val();
-        if (name.length > 0) {
+        var usage = $('#input-usage-water').val();
+        if (name.length > 0 && usage.length > 0) {
             $("#consumers").append(new_consumer(gCosumerType.WATER, name));
+            updateStatistics(gCosumerType.WATER, usage);
+
             $('#input-name-water').val('');
+            $('#input-usage-water').val('');
         } else {
             return false;
         }
@@ -70,9 +77,14 @@ $(document).ready(function() {
 
     $('#btn-done-gas').click(function() {
         var name = $('#input-name-gas').val();
-        if (name.length > 0) {
+        var usage = $('#input-usage-gas').val();
+
+        if (name.length > 0 && usage.length > 0) {
             $("#consumers").append(new_consumer(gCosumerType.GAS, name));
+            updateStatistics(gCosumerType.GAS, usage);
+
             $('#input-name-gas').val('');
+            $('#input-usage-gas').val('');
         } else {
             return false;
         }
@@ -108,18 +120,36 @@ function remove(id) {
 
 
 function updateStatistics(type, a, b) {
+    var cost_day;
+
     if (type == gCosumerType.ELECTRICITY) {
         var power = parseInt(a);
         var usage = parseInt(b);
-        var cost_day = gCost_kWh * (power / 1000) * usage;
-        var cost_month = cost_day * 30;
-        var cost_year = cost_day * 365;
-
-        $('#electricity-day').html((parseFloat($('#electricity-day').html()) + cost_day).toFixed(2));
-        $('#electricity-month').html((parseFloat($('#electricity-month').html()) + cost_month).toFixed(2));
-        $('#electricity-year').html((parseFloat($('#electricity-year').html()) + cost_year).toFixed(2));
-        $('#electricity-number').html((parseInt($('#electricity-number').html()) + 1).toString());
+        cost_day = gCostElectricity * (power / 1000) * usage;
     }
+
+    else if (type == gCosumerType.WATER) {
+        var usage = parseInt(a);
+        cost_day = gCostWater * usage;
+    }
+
+    else if (type == gCosumerType.GAS) {
+        var usage = parseInt(a);
+        cost_day = gCostGas * usage;
+    }
+
+    var cost_month = cost_day * 30;
+    var cost_year = cost_day * 365;
+
+    $('#' + type.name + '-day').html(    (parseFloat($('#' + type.name + '-day').html())    + cost_day).toFixed(2));
+    $('#' + type.name + '-month').html(  (parseFloat($('#' + type.name + '-month').html())  + cost_month).toFixed(2));
+    $('#' + type.name + '-year').html(   (parseFloat($('#' + type.name + '-year').html())   + cost_year).toFixed(2));
+    $('#' + type.name + '-number').html( (parseInt(  $('#' + type.name + '-number').html()) + 1).toString());
+
+    $('#total-day').html(    (parseFloat($('#total-day').html())    + cost_day).toFixed(2));
+    $('#total-month').html(  (parseFloat($('#total-month').html())  + cost_month).toFixed(2));
+    $('#total-year').html(   (parseFloat($('#total-year').html())   + cost_year).toFixed(2));
+    $('#total-number').html( (parseInt(  $('#total-number').html()) + 1).toString());
 }
 
 /*****************************************************************************/

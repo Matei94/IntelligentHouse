@@ -93,24 +93,24 @@
                   </tr>
                   <tr class="info" align="right">
                     <td align="left"><span class="glyphicon glyphicon-tint"></span> Water</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
+                    <td id="water-day">0</td>
+                    <td id="water-month">0</td>
+                    <td id="water-year">0</td>
+                    <td id="water-number">0</td>
                   </tr>
                   <tr class="danger" align="right">
                     <td align="left"><span class="glyphicon glyphicon-fire"></span> Gas</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
+                    <td id="gas-day">0</td>
+                    <td id="gas-month">0</td>
+                    <td id="gas-year">0</td>
+                    <td id="gas-number">0</td>
                   </tr>
                   <tr align="right">
                     <td align="left"><strong>&#36; TOTAL</strong></td>
-                    <td><strong>1</strong></td>
-                    <td><strong>2</strong></td>
-                    <td><strong>3</strong></td>
-                    <td><strong>4</strong></td>
+                    <td><strong id="total-day">0</strong></td>
+                    <td><strong id="total-month">0</strong></td>
+                    <td><strong id="total-year">0</strong></td>
+                    <td><strong id="total-number">0</strong></td>
                   </tr>
                 </tbody>
               </table>
@@ -194,9 +194,9 @@
 
                 <!-- Usage -->
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="water_usage">Usage:</label>
+                  <label class="control-label col-sm-2" for="input-usage-water">Usage:</label>
                   <div class="col-sm-10">
-                    <input type="number" class="form-control" id="water_usage" placeholder="Enter volume used per day [m&#179;/day]">
+                    <input id="input-usage-water" type="number" class="form-control" placeholder="Enter volume used per day [m&#179;/day]">
                   </div>
                 </div>
                 <!-- Power end -->
@@ -234,9 +234,9 @@
 
                 <!-- Usage -->
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="gas_usage">Usage:</label>
+                  <label class="control-label col-sm-2" for="input-usage-gas">Usage:</label>
                   <div class="col-sm-10">
-                    <input id="gas_usage" type="number" class="form-control" placeholder="Enter volume used per day [m&#179;/day]">
+                    <input id="input-usage-gas" type="number" class="form-control" placeholder="Enter volume used per day [m&#179;/day]">
                   </div>
                 </div>
                 <!-- Usage end -->
