@@ -1,3 +1,9 @@
+body {
+  background-image: url("../img/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .top-buffer {
   margin-top: 20px;
 }
@@ -24,4 +30,24 @@
   margin-right: auto;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+#weather {
+  background-color: #e5ecff;
+  width: inherit;
+  height: 220px;
+}
+
+#weather h2 {
+  color: #fff;
+  text-align: center;
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.opa {
+  opacity: 0.7;
+}
+
+.opa:hover {
+  opacity: 1.0;
 }

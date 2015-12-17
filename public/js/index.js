@@ -183,14 +183,21 @@ function getLocation() {
 
 
 function showPosition(position) {
-    // var latlon = position.coords.latitude + "," + position.coords.longitude;
-
-    // var img_url = "http://maps.googleapis.com/maps/api/staticmap?center="
-    // +latlon+"&zoom=14&size=" + $('#mapholder').width() + "x" + $('#mapholder').height() + "&sensor=false";
-    // $('#mapholder').html("<img src='"+img_url+"'>");
-
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
+
+    $.simpleWeather({
+        location: lat + ',' + lon,
+        unit: 'c',
+        success: function(weather) {
+            html = '<h2><i class="icon-'+weather.code+'"></i> '+weather.temp+'&deg;'+weather.units.temp+'</h2>';
+
+            $("#weather").html(html);
+        },
+        error: function(error) {
+            $("#weather").html('<p>'+error+'</p>');
+        }
+    });
 
     latlon = new google.maps.LatLng(lat, lon)
     mapholder = document.getElementById('mapholder')
